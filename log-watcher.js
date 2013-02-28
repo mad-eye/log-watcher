@@ -10,6 +10,12 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
+
+  Template.logs.helpers({
+    entries: function(){
+      return [{time: "NOW", "severity":"CRITICAL", "message":"BLABHALB"}];
+    }}    
+  );
 }
 
 if (Meteor.isServer) {
