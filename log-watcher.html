@@ -12,5 +12,7 @@
 </template>
 
 <template name="logs">
-  LOGS!
+  {{#each entries}}
+  {{time}} - {{severity}} {{message}}<br />
+  {{/each}}
 </template>
