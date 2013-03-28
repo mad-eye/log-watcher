@@ -46,16 +46,26 @@ randomMessage = ->
         'Emacs detected.'
     else if p > 0.85
         'Found a null something-or-other.'
-    else if p > 0.70
-        'GET request with fileId 12345'
-    else if p > 0.60
-        'POST request to update project.'
+    else if p > 0.75
+        'GET request for more cat videos.'
+    else if p > 0.65
+        'T-minus 3 days.'
+    else if p > 0.55
+        'POST request to update stuff.'
     else if p > 0.45
-        'Starting up server.'
-    else if p > 0.30
+        'Starting up ice-cream server.'
+    else if p > 0.35
         "I've run out of funny."
-    else if p > 0.10
+    else if p > 0.25
         'Potential issue with null form.'
+    else if p > 0.20
+        'Too many cats on the keyboard.'
+    else if p > 0.15
+        'Node moved behind the router.'
+    else if p > 0.10
+        'The sheep is too warm.'
+    else if p > 0.05
+        'Instance hacking going on.'
     else
         'Core dump breached.'
 
