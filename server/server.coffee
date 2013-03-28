@@ -8,11 +8,16 @@ Meteor.startup ->
     LogEntries.allow {
       remove: -> true
     }
+    
+Meteor.methods
+    log: (level, message)->
+        makeEvent(level, message)
 
 levelMap = {1:'DEBUG', 2:'INFO', 3:'WARN', 4:'ERROR'}
 
-makeEvent = ->
-    level = randomLevel()
+makeEvent = (level, message)->
+    level = randomLevel() unless level
+    message = randomMessage() unless message
     now = new Date()
     seconds = now.getSeconds()
     if seconds < 10
@@ -26,7 +31,7 @@ makeEvent = ->
         formattedTimestamp: formattedTimestamp
         level: level
         levelMessage : levelMap[level]
-        message: randomMessage()
+        message: message
   
 randomLevel = ->
     p = Math.random()
