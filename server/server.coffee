@@ -1,24 +1,43 @@
-Meteor.setTimeout ->
-    LogEvents.insert makeEvent() 
+Meteor.setInterval ->
+    entry = makeEvent()
+    LogEntries.insert entry
+    console.log "Made log entry", entry
 , 2*1000
 
+Meteor.startup ->
+    LogEntries.allow {
+      remove: -> true
+    }
+
+levelMap = {1:'DEBUG', 2:'INFO', 3:'WARN', 4:'ERROR'}
+
 makeEvent = ->
+    level = randomLevel()
+    now = new Date()
+    seconds = now.getSeconds()
+    if seconds < 10
+        seconds = "0#{seconds}"
+    else
+        seconds = "#{seconds}"
+    formattedTimestamp = "#{now.getFullYear()}-#{now.getMonth()+1}-#{now.getDate()}"
+    formattedTimestamp += " #{now.getHours()}:#{now.getMinutes()}:#{seconds}"
     event =
-        timestamp: new Date
-        level: randomLevel()
+        timestamp: now
+        formattedTimestamp: formattedTimestamp
+        level: level
+        levelMessage : levelMap[level]
         message: randomMessage()
   
 randomLevel = ->
-    #TODO: Make a random level
     p = Math.random()
     if p > 0.90
-        'ERROR'
+        4
     else if p > 0.70
-        'WARN'
+        3
     else if p > 0.40
-        'INFO'
+        2
     else
-        'DEBUG'
+        1
 
 randomMessage = ->
     #TODO: Make a random message

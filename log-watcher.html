@@ -3,16 +3,38 @@
 </head>
 
 <body>
-  {{> hello}}
+    <h1>Logs</h1>
+    {{> controls}}
+    {{> logs}}
 </body>
 
-<template name="hello">
-  <h1>Log Viewer</h1>
-  {{> logs}}
+<template name="controls">
+    <div>
+        <div class="control pull-left">
+            <label for="search-filter">Filter by string:</label>
+            <input type="text" id="search-filter" value="" />    
+        </div>
+        <div class="control pull-left">
+            <label for="level-filter">Min Level</label>
+            <input id="level-filter" list="loglevels" type="range" min="1" max="4" step="1" value="1" />
+            <datalist id="loglevels">
+                <option label="DEBUG" value="1" />
+                <option label="INFO" value="2" />
+                <option label="WARN" value="3" />
+                <option label="ERROR" value="4" />
+            </datalist>
+            <span>{{logLevel}}</span>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 </template>
 
 <template name="logs">
-  {{#each entries}}
-  {{time}} - {{severity}} {{message}}<br />
-  {{/each}}
+    {{#each entries}}
+    <div class="log-entry {{level}}">
+        <span class="timestamp">{{formattedTimestamp}}</span>
+        <span class="level {{levelMessage}}">{{levelMessage}}</span>
+        <span class="message">{{message}}</span>
+    </div>
+    {{/each}}
 </template>

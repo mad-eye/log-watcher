@@ -1,1 +1,23 @@
 /* CSS declarations go here */
+
+.log-entry.ERROR {
+    font-weight:bold;
+}
+.level {
+    &.ERROR {
+        color: red;
+    }
+    &.WARN {
+        color: orange;
+    }
+    &.INFO {
+        color: blue;
+    }
+    &.DEBUG {
+        color: grey;
+    }
+}
+
+.control {
+    padding: 4px;
+}
