@@ -14,7 +14,7 @@ if Meteor.isClient
             LogEntries.find(
                 {
                     message: {$regex: Session.get "filterText"}
-                    level: {$gte: parseInt(Session.get("filterLevel") ? 1)}                
+                    level: {$gte: parseInt(Session.get("filterLevel") ? 1)}
                 },
                 {limit:20, sort:{timestamp:-1}},
             ).fetch()
