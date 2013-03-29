@@ -15,17 +15,22 @@ Meteor.methods
 
 levelMap = {1:'DEBUG', 2:'INFO', 3:'WARN', 4:'ERROR'}
 
+cleanDigit = (digit) ->
+    if digit < 10
+        digit = "0#{digit}"
+    else
+        digit = "#{digit}"
+
+
 makeEvent = (level, message)->
     level = randomLevel() unless level
     message = randomMessage() unless message
     now = new Date()
-    seconds = now.getSeconds()
-    if seconds < 10
-        seconds = "0#{seconds}"
-    else
-        seconds = "#{seconds}"
+    seconds = cleanDigit now.getSeconds()
+    minutes = cleanDigit now.getminutes()
+    hours = cleanDigit now.gethours()
     formattedTimestamp = "#{now.getFullYear()}-#{now.getMonth()+1}-#{now.getDate()}"
-    formattedTimestamp += " #{now.getHours()}:#{now.getMinutes()}:#{seconds}"
+    formattedTimestamp += " #{hours}:#{minutes}:#{seconds}"
     event =
         timestamp: now
         formattedTimestamp: formattedTimestamp
